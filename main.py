@@ -33,6 +33,10 @@ def bellman_ford(G, start):
     for v, u in prev.items():
         if u is not None:
             shortest_tree_edges.append((u, v))
+    
+    print("Shortest distances from node", start)
+    for node in sorted(G.nodes()):
+        print(f"Node {node}: Distance = {dist[node]}")
 
     node_colors = ['gold' if node == start else 'skyblue' for node in G.nodes()]
     edge_colors = ['green' if (u, v) in shortest_tree_edges or (not G.is_directed() and (v, u) in shortest_tree_edges) else 'gray' for u, v in G.edges()]
@@ -43,10 +47,6 @@ def bellman_ford(G, start):
     plt.title(f"Shortest Paths from Node {start} (Bellman-Ford)")
     plt.axis('off')
     plt.show()
-
-    print("Shortest distances from node", start)
-    for node in sorted(G.nodes()):
-        print(f"Node {node}: Distance = {dist[node]}")
 
     return dist, prev
 
